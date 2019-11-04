@@ -8,13 +8,14 @@ public class PostController {
 
     @GetMapping("/posts")
     @ResponseBody
-    public String posts(){
+    public String index(){
         return "Posts index page!";
     }
 
-    @RequestMapping(path = "/posts/{id}")
+//    @RequestMapping(path = "/posts/{id}")
+    @GetMapping("/posts/{id}")
     @ResponseBody
-    public String individualPost(@PathVariable int id){
+    public String individualPost(@PathVariable long id){
         return "Individual post #: " + id;
     }
 
@@ -26,8 +27,8 @@ public class PostController {
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createNewPost(){
-        return "Create new post";
+    public String createNewPost(@RequestParam String title, @RequestParam String body){
+        return "Create new post: Title " + title + " Body: " + body;
     }
 
 }
