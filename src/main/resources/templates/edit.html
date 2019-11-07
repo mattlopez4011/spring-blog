@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Post Home</title>
+    <!--    <link rel="stylesheet" th:href="@{/styles.css}"/>-->
+    <th:block th:replace="fragments/navbar :: main-navbar"/>
+    <th:block th:replace="fragments/header :: main-header"/>
+
 </head>
 <body>
 
-Hello!! Edit page :)
+<div class="container mw-75">
+    <h1>Display Post:</h1>
+    <div class="card">
+<!--        Go back to current ad-->
+        <a th:href="@{'/posts/' + ${id}}"  class="btn btn-primary">&#8592; Go Back</a>
+        <h1>Edit Post:</h1>
+        <form action="/posts/edit" method="post">
+            <input type="hidden" name="id" th:value="${id}" >
+            <label for="title">Edit Title:</label>
+            <input type="text" name="newTitle" id="title" th:value="${title}" class="form-control">
+            <label for="body">Edit Body:</label>
+            <textarea name="newBody" id="body" class="form-control" th:inline="text"> [[${body}]]  </textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
+    </div>
+</div>
+
+<!--Example footer code-->
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>
