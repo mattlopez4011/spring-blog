@@ -1,0 +1,46 @@
+USE spring_blog_db;
+
+INSERT INTO posts(body, title, post_details_id) VALUE ('hello  world', 'hello world', 1);
+insert into posts (title, body, post_details_id) values ('Witty', 'Osmar', 14);
+insert into posts (title, body, post_details_id) values ('Hinda', 'Esposito', 15);
+insert into posts (title, body, post_details_id) values ('Yves', 'Masurel', 13);
+insert into posts (title, body, post_details_id) values ('Ayn', 'Lamblin', 6);
+insert into posts (title, body, post_details_id) values ('Rube', 'Strutton', 14);
+insert into posts (title, body, post_details_id) values ('Marrilee', 'Hawkings', 12);
+insert into posts (title, body, post_details_id) values ('Eleni', 'Calverd', 9);
+insert into posts (title, body, post_details_id) values ('Rourke', 'Citrine', 19);
+insert into posts (title, body, post_details_id) values ('Kaila', 'Petegree', 19);
+insert into posts (title, body, post_details_id) values ('Margit', 'Sculpher', 12);
+insert into posts (title, body, post_details_id) values ('Augustine', 'Mara', 11);
+insert into posts (title, body, post_details_id) values ('Fleurette', 'Groneway', 20);
+insert into posts (title, body, post_details_id) values ('Ninnetta', 'Tribe', 11);
+insert into posts (title, body, post_details_id) values ('Carree', 'Casterot', 7);
+insert into posts (title, body, post_details_id) values ('Barbara-anne', 'Bugbird', 5);
+insert into posts (title, body, post_details_id) values ('Karola', 'Spittal', 16);
+insert into posts (title, body, post_details_id) values ('Delmore', 'Langer', 6);
+insert into posts (title, body, post_details_id) values ('Lisha', 'Reck', 20);
+insert into posts (title, body, post_details_id) values ('Joleen', 'Widdowes', 13);
+insert into posts (title, body, post_details_id) values ('Yolane', 'Briscow', 16);
+
+
+INSERT INTO posts_details(history_of_post, is_awesome, topic_description) value ('this post is old', 1,'this post was made old');
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Chevrolet', 'Tracker', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Ford', 'Bronco', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('GMC', '2500', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Buick', 'LeSabre', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Mitsubishi', 'Outlander', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Dodge', 'Colt', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Volvo', 'XC90', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Toyota', 'Echo', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Mazda', 'Familia', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Volkswagen', 'Eurovan', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Subaru', 'Legacy', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Dodge', 'Caliber', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Chevrolet', 'Cobalt', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Ford', 'LTD Crown Victoria', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Ford', 'Expedition', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Lincoln', 'Navigator L', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Ford', 'Thunderbird', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Ford', 'Thunderbird', false);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Plymouth', 'Breeze', true);
+insert into posts_details (history_of_post, topic_description, is_awesome) values ('Mazda', '929', false);
