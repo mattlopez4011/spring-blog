@@ -34,3 +34,8 @@ h1{
 .allPostCard {
  margin-bottom: 5%;
 }
+
+.createForm{
+ display: flex;
+ flex-direction: column;
+}

@@ -1,6 +1,7 @@
 package com.codeup.blog.blog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts") // Table name
@@ -18,15 +19,45 @@ public class Post {
     @OneToOne
     private PostDetails postDetails;
 
-//    Empty Constructor
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<PostImage> postImage;
+
+    @ManyToMany(mappedBy = "posts")
+    private List<Tag> tags;
+
+    @ManyToOne
+    @JoinColumn( name = "user_id")
+    private User user;
+
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
+//    private Post post;
+
+    //    Empty Constructor
     public Post(){
 
     }
 
 //    Constructor
+    public Post(long id, String title, String body) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
+
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {
@@ -58,5 +89,21 @@ public class Post {
 
     public void setPostDetails(PostDetails postDetails) {
         this.postDetails = postDetails;
+    }
+
+    public List<PostImage> getPostImage() {
+        return postImage;
+    }
+
+    public void setPostImage(List<PostImage> postImage) {
+        this.postImage = postImage;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

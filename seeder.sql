@@ -1,11 +1,30 @@
 USE spring_blog_db;
 
-INSERT INTO posts(body, title, post_details_id) VALUE ('hello  world', 'hello world', 1);
-insert into posts (title, body, post_details_id) values ('Witty', 'Osmar', 14);
-insert into posts (title, body, post_details_id) values ('Hinda', 'Esposito', 15);
-insert into posts (title, body, post_details_id) values ('Yves', 'Masurel', 13);
-insert into posts (title, body, post_details_id) values ('Ayn', 'Lamblin', 6);
-insert into posts (title, body, post_details_id) values ('Rube', 'Strutton', 14);
+SHOW CREATE TABLE posts;
+
+DROP database if exists spring_blog_db;
+
+DROP TABLE IF EXISTS users;
+
+DROP TABLE IF EXISTS posts_details;
+
+describe dogs;
+describe posts_details;
+
+show tables;
+
+
+
+USE spring_blog_db;
+
+drop table if exists posts;
+
+INSERT INTO posts(title, body, post_details_id, user_id) VALUE ('hello  world', 'Hello World body', 1, 1);
+insert into posts (title, body, post_details_id, user_id) values ('Witty', 'Osmar', 2, 2);
+insert into posts (title, body, post_details_id, user_id) values ('Hinda', 'Esposito', 3, 3);
+insert into posts (title, body, post_details_id, user_id) values ('Yves', 'Masurel', 4, 4);
+insert into posts (title, body, post_details_id, user_id) values ('Ayn', 'Lamblin', 5, 5);
+insert into posts (title, body, post_details_id, user_id) values ('Rube', 'Strutton', 6, 6);
 insert into posts (title, body, post_details_id) values ('Marrilee', 'Hawkings', 12);
 insert into posts (title, body, post_details_id) values ('Eleni', 'Calverd', 9);
 insert into posts (title, body, post_details_id) values ('Rourke', 'Citrine', 19);
@@ -44,3 +63,44 @@ insert into posts_details (history_of_post, topic_description, is_awesome) value
 insert into posts_details (history_of_post, topic_description, is_awesome) values ('Ford', 'Thunderbird', false);
 insert into posts_details (history_of_post, topic_description, is_awesome) values ('Plymouth', 'Breeze', true);
 insert into posts_details (history_of_post, topic_description, is_awesome) values ('Mazda', '929', false);
+
+
+insert into posts_images (image_title, url, post_id) values ('22 Bullets (L''immortel)', 'https://placekitten.com/g/200/300', 1);
+insert into posts_images (image_title, url, post_id) values ('Peanuts - Die Bank zahlt alles', 'https://placekitten.com/g/200/300', 1);
+insert into posts_images (image_title, url, post_id) values ('Street Mobster (a.k.a. Modern Yakuza: Outlaw Killer) (Gendai yakuza: hito-kiri yota)', 'https://placekitten.com/g/200/300', 1);
+
+
+# 3. Seed the tags table with three tags named the following: "Silly", "Funny", and "Humor".
+insert into tags (name)
+    values ('Silly');
+insert into tags (name)
+values ('Funny');
+insert into tags (name)
+values ('Humor');
+
+# 4. Seed the post_tag table with one post that has the "Silly" and "Funny" tags and another having the "Humor" and "Funny" tags. In total, you will need to insert four records.
+insert into post_tag (tag_id, post_id)
+                         VALUE ('1', '1');
+insert into post_tag (tag_id, post_id)
+    VALUE ('2', '1');
+insert into post_tag (tag_id, post_id)
+    VALUE ('1', '2');
+insert into post_tag (tag_id, post_id)
+    VALUE ('1', '3');
+insert into post_tag (tag_id, post_id)
+    VALUE ('2', '4');
+insert into post_tag (tag_id, post_id)
+    VALUE ('2', '5');
+insert into post_tag (tag_id, post_id)
+    VALUE ('3', '5');
+insert into post_tag (tag_id, post_id)
+    VALUE ('3', '6');
+
+drop table users;
+# Users seeder
+insert into users (email, password, username) VALUE ('mock1@gmail.com', 'password1', 'mock1');
+insert into users (email, password, username) VALUE ('mock2@gmail.com', 'password2', 'mock2');
+insert into users (email, password, username) VALUE ('mock3@gmail.com', 'password3', 'mock3');
+insert into users (email, password, username) VALUE ('mock4@gmail.com', 'password4', 'mock4');
+insert into users (email, password, username) VALUE ('mock5@gmail.com', 'password5', 'mock5');
+insert into users (email, password, username) VALUE ('mock6@gmail.com', 'password6', 'mock6');

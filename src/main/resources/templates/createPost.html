@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Post Home</title>
+    <!--    <link rel="stylesheet" th:href="@{/styles.css}"/>-->
+    <th:block th:replace="fragments/navbar :: main-navbar"/>
+    <th:block th:replace="fragments/header :: main-header"/>
+
+</head>
+<body>
+
+<div class="container mw-75">
+    <h1>Create New Post:</h1>
+    <div class="card">
+<!--        <h3 th:text="${title}"/>-->
+<!--        <p th:text="${body}"/>-->
+
+        <form action="/posts/create" method="post" class="createForm">
+<!--            <input type="hidden" name="id" th:value="${id}">-->
+<!--            Title-->
+            <div class="p-1">
+                <label for="title">Post Title:</label>
+                <input type="text" id="title" name="title" placeholder="Post Title">
+            </div>
+<!--            Post Body-->
+            <div class="p-1">
+                <label for="body">Post Description:</label>
+                <input type="text" id="body" name="body" placeholder="Post Description">
+            </div>
+            <button class="btn btn-primary" type="submit" >CREATE NEW POST</button>
+        </form>
+<!--        <a th:href="@{'/posts/edit/' + ${id}}"  class="btn btn-warning">EDIT POST</a>-->
+    </div>
+</div>
+
+<!--Example footer code-->
+<th:block th:replace="fragments/footer :: main-footer"/>
+</body>
+</html>

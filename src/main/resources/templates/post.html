@@ -16,6 +16,7 @@
     <div th:each="post : ${posts}" class="card allPostCard">
         <h3 th:text="${post.title}"/>
         <p th:text="${post.body}"/>
+        <h3 th:text="${post.user.email}"></h3>
         <!--        <form action="/posts/delete" method="post">-->
         <!--            <input type="hidden" name="id" th:value="${post.id}">-->
         <!--            <button class="btn btn-primary" type="submit" th:value="${post.id}">DELETE POST</button>-->

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<!--  TESTING ONE TO ONE  -->
+
+
+<!--    <h1 th:text="${pet.name}"></h1>-->
+<!--    <h3 th:text="${pet.petDetails.personalityDescription}"></h3>-->
+
+<!--    <form th:action="@{'/pets/update/' + ${pet.id}}" th:method="post">-->
+<!--        <label for="personality">Personality</label>-->
+<!--        <input id="personality" type="text" name="personality" th:value="${pet.petDetails.personalityDescription}">-->
+<!--        <button>Change Personality</button>-->
+<!--    </form>-->
+
+
+<!-- TESTING ONE TO MANY -->
+
+
+<!--<span th:text="${post.title}"></span></h1>-->
+
+<!--<ul th:each="post : ${post.postImage}">-->
+<!--    <h1 th:text="${post.image_title}"></h1>-->
+<!--    <img th:src="${post.url}" alt="">-->
+<!--</ul>-->
+
+<!--<ul th:each="tag : ${post.tags}">-->
+<!--    <li th:text="${tag.name}"></li>-->
+<!--</ul>-->
+
+<!--&lt;!&ndash;<div th:object="${aasfd}"></div>&ndash;&gt;-->
+
+
+<!--<form th:action="@{'/posts/' + ${post.id} + '/add-image'}" th:method="post">-->
+<!--    &lt;!&ndash;        name, brand, is_destroyed, description, pet_id&ndash;&gt;-->
+<!--    <input type="text" name="title" placeholder="title">-->
+<!--    <input type="text" name="url" placeholder="url">-->
+<!--    <button>Add Image</button>-->
+<!--</form>-->
+<div class="container">
+    <h1> List of Post with tags:</h1>
+    <div th:each=" post : ${posts}" class="card allPostCards">
+        <h1 th:text="${post.title}"></h1>
+<!--        Post Image-->
+        <!--<ul th:each="post : ${post.postImage}">-->
+        <!--    <h1 th:text="${post.image_title}"></h1>-->
+        <!--    <img th:src="${post.url}" alt="">-->
+        <!--</ul>-->
+        <ul th:each="tag : ${post.tags}">
+            <li th:text="${tag.name}"></li>
+        </ul>
+
+        <form th:action="@{'/post-tags/' + ${post.id} }" th:method="post">
+            <!--        name, brand, is_destroyed, description, pet_id-->
+            <input type="text" name="name" placeholder="Enter tag:">
+
+            <button>Add Tag</button>
+        </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>
