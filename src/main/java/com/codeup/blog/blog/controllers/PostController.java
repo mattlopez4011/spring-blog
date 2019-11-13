@@ -8,6 +8,9 @@ import com.codeup.blog.blog.repositories.PostImageRepository;
 import com.codeup.blog.blog.repositories.PostRepository;
 import com.codeup.blog.blog.repositories.TagRepository;
 import com.codeup.blog.blog.repositories.UserRepository;
+import com.codeup.blog.blog.services.EmailServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,9 @@ public class PostController {
     private final PostImageRepository postImageDao;
     private final TagRepository tagDao;
     private final UserRepository userDao;
+
+    @Autowired
+    EmailServices emailServices;
 
 //   Dao Constructor
     public PostController(PostRepository postDao, PostImageRepository postImageDao, TagRepository tagDao, UserRepository userDao){
@@ -42,10 +48,11 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable long id, Model viewModel){
 
-        viewModel.addAttribute("title", postDao.findById(id).get().getTitle());
-        viewModel.addAttribute("body", postDao.findById(id).get().getBody());
-        viewModel.addAttribute("email", postDao.findById(id).get().getUser().getEmail());
-        viewModel.addAttribute("id", id);
+        viewModel.addAttribute("post", postDao.getOne(id));
+//        viewModel.addAttribute("title", postDao.findById(id).get().getTitle());
+//        viewModel.addAttribute("body", postDao.findById(id).get().getBody());
+//        viewModel.addAttribute("email", postDao.findById(id).get().getUser().getEmail());
+//        viewModel.addAttribute("id", id);
 
         return "showPost";
     }
@@ -67,6 +74,7 @@ public class PostController {
     public String deletePost(@RequestParam("id") String id){
         long deleteId = Long.parseLong(id);
         postDao.deleteById(deleteId);
+
         return "redirect:/posts";
     }
     // EDIT
@@ -75,18 +83,27 @@ public class PostController {
         viewModel.addAttribute("title", postDao.findById(id).get().getTitle());
         viewModel.addAttribute("body", postDao.findById(id).get().getBody());
         viewModel.addAttribute("id", id);
+        viewModel.addAttribute("post", postDao.getOne(id));
 //        System.out.println("editId " + id);
         return "edit";
     }
 
-    @PostMapping("/posts/edit")
-    @ResponseBody
-    public  String editPost(@RequestParam("id") Long id, @RequestParam("newBody") String newBody, @RequestParam("newTitle") String newTitle){
+    // ======== EDIT POST
+    @PostMapping("/posts/edit/{id}")
+    public  String editPost(@PathVariable long id, @RequestParam String newBody, @RequestParam String newTitle){
 //        long editId = Long.parseLong(id);
-//        postDao.
+        Post post = postDao.getOne(id);
+        post.setTitle(newTitle); // Setting new title
+        post.setBody(newBody); // Setting new body
+//        post.setTags(tagCrazy); // Setting new tag
+
+        postDao.save(post);
+
+//        viewModel.addAttribute("look", tagDao.getOne(id));  // check what this returns
 //        System.out.println(editId);
-        return "id= " + id + "newBody= " + newBody + "newTitle= " + newTitle;
-//        return "edit";
+//        return "id= " + id + "newBody= " + newBody + "newTitle= " + newTitle;
+        return "redirect:/posts/edit/" + post.getId(); // Returns post user is editing
+
     }
 
 //    Ono to one relationship
@@ -141,11 +158,11 @@ public class PostController {
 
 // Relationships Exercise
     @GetMapping("/posts/create")
-    public String formToCreatePost(){
-
+    public String formToCreatePost(Model model){
+        model.addAttribute("post", new Post());
         return "createPost";
     }
-
+//===== CREATE POST
     @PostMapping("/posts/create")
     public String createNewPost(
             @RequestParam String title,
@@ -154,11 +171,14 @@ public class PostController {
     ){
 //
         Post postToInsert = new Post(title, body);
-        postToInsert.setUser(userDao.getOne(1L));
+        postToInsert.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Post post = postDao.save(postToInsert);
+        // Send email message
+        emailServices.prepareAndSend(post, "Post created", "An post has been created, with the id of " + post.getId());
 
         return "redirect:/posts/" + post.getId();
     }
+
 
 }
 

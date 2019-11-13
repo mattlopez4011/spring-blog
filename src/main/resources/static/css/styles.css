@@ -39,3 +39,23 @@ h1{
  display: flex;
  flex-direction: column;
 }
+
+.createUser{
+ background-color: #A9A9A9;
+ display: flex;
+ justify-content: center;
+ color: #343A40;
+
+
+}
+
+.postBody{
+ margin-bottom: 10%;
+ margin-top: 5%;
+}
+
+.tagsBox{
+ display: flex;
+ justify-content: center;
+ margin-bottom: 5%;
+}

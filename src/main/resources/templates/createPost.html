@@ -16,20 +16,30 @@
 <!--        <h3 th:text="${title}"/>-->
 <!--        <p th:text="${body}"/>-->
 
-        <form action="/posts/create" method="post" class="createForm">
+        <form th:action="@{/posts/create}" th:method="post" class="createForm" th:object="${post}">
 <!--            <input type="hidden" name="id" th:value="${id}">-->
 <!--            Title-->
-            <div class="p-1">
+            <div class="p-3">
                 <label for="title">Post Title:</label>
-                <input type="text" id="title" name="title" placeholder="Post Title">
+<!--                <input type="text" id="title" name="title" placeholder="Post Title">-->
+                <input  placeholder="Post Title" th:field="*{title}">
             </div>
+            <!--            Tag-->
+            <div class="p-3">
+                <label for="tag">Post Tag:</label>
+                <!--                <input type="text" id="title" name="title" placeholder="Post Title">-->
+                <input  placeholder="Post Tags" th:field="*{tags}">
+            </div>
+<!--            <br>-->
 <!--            Post Body-->
-            <div class="p-1">
+            <div class="p-3">
                 <label for="body">Post Description:</label>
-                <input type="text" id="body" name="body" placeholder="Post Description">
+<!--                <input type="text" id="body" name="body" placeholder="Post Description">-->
+                <textarea class="form-control" rows="3" placeholder="Post Description" th:field="*{body}"></textarea>
             </div>
             <button class="btn btn-primary" type="submit" >CREATE NEW POST</button>
         </form>
+        <br>
 <!--        <a th:href="@{'/posts/edit/' + ${id}}"  class="btn btn-warning">EDIT POST</a>-->
     </div>
 </div>

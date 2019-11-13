@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <title>Post Home</title>
@@ -11,21 +11,49 @@
 <body>
 
 <div class="container mw-75">
-    <h1>Display Post:</h1>
-    <div class="card">
-        <h3 th:text="${title}"/>
-        <p th:text="${body}"/>
-        <h3 th:text="${post.user.email}"></h3>
-<!--        DELETE BUTTON-->
-            <form action="/posts/delete" method="post">
-                <input type="hidden" name="id" th:value="${id}">
-                <button class="btn btn-danger" type="submit" th:value="${id}">DELETE POST</button>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Display Post:</h1>
+<!--            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>-->
+        </div>
+    </div>
+
+    <div class="card bg-light">
+<!--        POST TITLE-->
+        <h2 th:text="${post.title}"/>
+<!--        POST BODY-->
+        <p th:text="${post.body}" class="text-center postBody"/>
+<!--        Tags Card-->
+        <div class="tagsBox" >
+            <span th:each=" tag : ${post.tags}" th:text="${tag.name}" class="badge badge-pill badge-info mx-1"></span>
+        </div>
+
+<!--&lt;!&ndash;        DELETE BUTTON&ndash;&gt;-->
+<!--            <form action="/posts/delete" method="post">-->
+<!--                <input type="hidden" name="id" th:value="${id}">-->
+<!--                <button class="btn btn-danger btn-block" type="submit" th:value="${id}">DELETE POST</button>-->
+<!--            </form>-->
+<!--&lt;!&ndash;        EDIT BUTTON&ndash;&gt;-->
+<!--        <a th:href="@{'/posts/edit/' + ${id}}"  class="btn btn-warning btn-block">EDIT POST</a>-->
+        <div sec:authorize="isAuthenticated()">
+
+        <th:block th:if="${post.user.id == #authentication.principal.id}">
+            <a th:href="@{'/posts/edit/' + ${id}}" class="btn btn-warning btn-block">Edit Ad</a>
+            <form th:action="@{'/delete/posts'}" method="post">
+                <button class="btn btn-danger btn-block" name="id" th:value="${id}">Delete Ad</button>
             </form>
-        <a th:href="@{'/posts/edit/' + ${id}}"  class="btn btn-warning">EDIT POST</a>
+        </th:block>
     </div>
 </div>
+<!--        Username box-->
+        <div th:text="'Created by: ' + ${post.user.email} " class="card-footer  text-muted createUser">
+            Created by: UserEmail
+        </div>
+    </div>
 
 <!--Example footer code-->
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>
+
+

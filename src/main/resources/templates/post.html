@@ -14,6 +14,9 @@
     <h1>All Posts:</h1>
 
     <div th:each="post : ${posts}" class="card allPostCard">
+        <div>
+            <span th:each="tag : ${post.tags}" th:text="${tag.name}" class="badge badge-pill badge-info"></span>
+        </div>
         <h3 th:text="${post.title}"/>
         <p th:text="${post.body}"/>
         <h3 th:text="${post.user.email}"></h3>
@@ -30,6 +33,6 @@
 
 
 <!--Example footer code-->
-<!--<th:block th:replace="fragments/footer :: main-footer"/>-->
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>
